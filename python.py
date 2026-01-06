@@ -1,21 +1,70 @@
-import pyttsx3  # Import text to speech library
+import json
+import os
 
-engine = pyttsx3.init()  # Initialize the TTS engine
+FILE = "tasks.json"
 
-# Set voice properties
-engine.setProperty('rate', 150)  # Speed of speech (words per minute)
-engine.setProperty('volume', 1)  # Volume level
+def load_tasks():
+    if os.path.exists(FILE):
+        with open(FILE, "r") as f:
+            return json.load(f)
+    return []
 
-# Function to make the AI speak
-def speak(text):
-    engine.say(text)        # Text to speak
-    engine.runAndWait()     # Play the speech
+def save_tasks(tasks):
+    with open(FILE, "w") as f:
+        json.dump(tasks, f, indent=4)
 
-# Main program
-if __name__ == "__main__":
+def show_tasks(tasks):
+    if not tasks:
+        print("No tasks found.")
+    for i, task in enumerate(tasks, start=1):
+        status = "true" if task["done"] else "false"
+        print(f"{i}. {task['title']} [{status}]")
+
+def add_task(tasks):
+    title = input("Enter task title: ")
+    tasks.append({"title": title, "done": False})
+    save_tasks(tasks)
+    print("Task added!")
+
+def mark_done(tasks):
+    show_tasks(tasks)
+    idx = int(input("Enter task number to mark done: ")) - 1
+    if 0 <= idx < len(tasks):
+        tasks[idx]["done"] = True
+        save_tasks(tasks)
+        print("Task marked done!")
+
+def delete_task(tasks):
+    show_tasks(tasks)
+    idx = int(input("Enter task number to delete: ")) - 1
+    if 0 <= idx < len(tasks):
+        removed = tasks.pop(idx)
+        save_tasks(tasks)
+        print(f"Deleted task: {removed['title']}")
+
+def main():
+    tasks = load_tasks()
     while True:
-        user_input = input("You: ")
-        if user_input.lower() in ['exit', 'quit']:
-            speak("Goodbye")
+        print("\nTask Manager")
+        print("1. Show tasks")
+        print("2. Add task")
+        print("3. Mark task done")
+        print("4. Delete task")
+        print("5. Exit")
+        choice = input("Choose an option: ")
+
+        if choice == "1":
+            show_tasks(tasks)
+        elif choice == "2":
+            add_task(tasks)
+        elif choice == "3":
+            mark_done(tasks)
+        elif choice == "4":
+            delete_task(tasks)
+        elif choice == "5":
             break
-        speak(user_input)   # Repeats what you write
+        else:
+            print("Invalid choice. Try again.")
+
+if __name__ == "__main__":
+    main()
