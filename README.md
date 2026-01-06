@@ -18,7 +18,7 @@ No external packages required
 
 Installation
 Download or clone the repository to your local machine:
-bashgit clone <>
+bashgit clone <https://github.com/vyanmadai7/task-manager-cli.git>
 cd task-manager
 Run the application:
 bashpython task_manager.py
