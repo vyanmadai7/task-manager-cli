@@ -1,34 +1,56 @@
-Task Manager CLI
-A command-line task manager built with Python. Track your to do items with persistent storage and a simple, intuitive interface.
-Overview
-This is a straightforward task management application that runs in your terminal. It stores tasks in a JSON file, making them persistent across sessions. The application is designed to be simple, fast, and require zero external dependencies.
-Features
+# Task Manager CLI
 
-View all tasks with their completion status
-Add new tasks with custom titles
-Mark tasks as complete
-Delete tasks you no longer need
-Automatic saving to disk after every operation
-Built entirely with Python's standard library
+A very simple command-line task manager written in Python. It lets you add, view, complete, and delete tasks directly from the terminal. Tasks are saved in a JSON file so they stay even after you close the program.
 
-Requirements
+---
 
-Python 3.x
-No external packages required
+## Overview
 
-Installation
-Download or clone the repository to your local machine:
-bashgit clone <https://github.com/vyanmadai7/task-manager-cli.git>
-cd task-manager
-Run the application:
-bashpython task_manager.py
+This project is a basic terminal-based task manager. It uses a single JSON file (`tasks.json`) to store tasks. The focus of this project is simplicity and clarity, using only Python’s built-in libraries.
+
+---
+
+## Features
+
+* Show all tasks with their completion status (`true` or `false`)
+* Add new tasks with a title
+* Mark existing tasks as done
+* Delete tasks from the list
+* Tasks are automatically saved after every change
+* Uses only Python’s standard library (no external packages)
+
+---
+
+## Requirements
+
+* Python 3.x
+* No third-party libraries
+
+---
+
+## Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/vyanmadai7/task-manager-cli.git
+cd task-manager-cli
 ```
 
-The application will create a `tasks.json` file in the same directory on first use.
+Run the program:
+
+```bash
+python task_manager.py
+```
+
+The program will create a `tasks.json` file automatically if it does not exist.
+
+---
 
 ## Usage
 
-When you run the program, you'll see an interactive menu:
+When you run the program, you will see this menu:
+
 ```
 Task Manager
 1. Show tasks
@@ -37,97 +59,90 @@ Task Manager
 4. Delete task
 5. Exit
 Choose an option:
-Available Commands
-1. Show tasks - Displays all your tasks numbered with their status (true for completed, false for pending)
-2. Add task - Prompts you to enter a task title and adds it to your list
-3. Mark task done - Shows your task list and lets you select which task to mark as complete
-4. Delete task - Shows your task list and lets you select which task to remove
-5. Exit - Closes the application
-Example Session
-bash$ python task_manager.py
+```
 
-Task Manager
-1. Show tasks
-2. Add task
-3. Mark task done
-4. Delete task
-5. Exit
+### Menu Options
+
+1. **Show tasks** – Displays all tasks with their index number and status
+2. **Add task** – Prompts for a task title and adds it to the list
+3. **Mark task done** – Marks a selected task as completed
+4. **Delete task** – Removes a selected task
+5. **Exit** – Closes the application
+
+---
+
+## Example
+
+```bash
 Choose an option: 2
 Enter task title: Review project documentation
 Task added!
 
-Task Manager
-1. Show tasks
-2. Add task
-3. Mark task done
-4. Delete task
-5. Exit
 Choose an option: 1
 1. Review project documentation [false]
 
-Task Manager
-1. Show tasks
-2. Add task
-3. Mark task done
-4. Delete task
-5. Exit
 Choose an option: 3
-1. Review project documentation [false]
 Enter task number to mark done: 1
 Task marked done!
-Data Storage
-Tasks are stored in tasks.json in the application directory. The file structure is simple:
-json[
-    {
-        "title": "Review project documentation",
-        "done": true
-    },
-    {
-        "title": "Update README file",
-        "done": false
-    }
+```
+
+---
+
+## Data Storage
+
+Tasks are stored in `tasks.json` in the project directory. Each task has a title and a completion flag:
+
+```json
+[
+  {
+    "title": "Review project documentation",
+    "done": true
+  }
 ]
-You can manually edit this file if needed, though the application handles all standard operations.
-Code Structure
-The application is organized into these main functions:
+```
 
-load_tasks() - Reads tasks from the JSON file, returns empty list if file doesn't exist
-save_tasks(tasks) - Writes the current task list to the JSON file
-show_tasks(tasks) - Prints all tasks with their index and completion status
-add_task(tasks) - Handles user input for creating new tasks
-mark_done(tasks) - Updates a task's status to completed
-delete_task(tasks) - Removes a task from the list
-main() - Main program loop that displays the menu and handles user choices
+---
 
-Error Handling
-The application includes basic error handling:
+## Code Structure
 
-Creates a new tasks file if one doesn't exist
-Validates task indices to prevent out-of-range errors
-Handles invalid menu selections by prompting to try again
-Displays appropriate messages when the task list is empty
+The program is divided into small, readable functions:
 
-Limitations
+* `load_tasks()` – Loads tasks from `tasks.json` if it exists
+* `save_tasks(tasks)` – Saves tasks to the JSON file
+* `show_tasks(tasks)` – Prints all tasks and their status
+* `add_task(tasks)` – Adds a new task
+* `mark_done(tasks)` – Marks a task as completed
+* `delete_task(tasks)` – Deletes a task
+* `main()` – Runs the menu loop and handles user choices
 
-No input validation for non-numeric entries when selecting tasks
-No confirmation prompt before deleting tasks
-Tasks are limited to single-line titles
-No support for task descriptions, priorities, or due dates
-No ability to edit existing task titles
+---
 
-Possible Improvements
-This is a minimal viable product that could be enhanced with:
+## Error Handling
 
-Task priorities or importance levels
-Due dates and time tracking
-Task categories or tags
-Multi-line descriptions for tasks
-Search and filter functionality
-Ability to edit task titles
-Confirmation prompts for destructive operations
-Better input validation and error messages
-Export to other formats like CSV or Markdown
-Statistics on task completion
+* Creates an empty task list if `tasks.json` does not exist
+* Prevents crashes when task numbers are out of range
+* Handles invalid menu choices by asking again
 
-Contributing
-This is an educational project intended to demonstrate basic Python concepts including file I/O, JSON handling, and CLI application structure. Feel free to fork and modify for your own use.
+---
+
+## Limitations
+
+* No validation for non-numeric input when entering task numbers
+* No confirmation before deleting a task
+* Task titles are single-line only
+* Tasks cannot be edited after creation
+* No priorities, due dates, or descriptions
+
+---
+
+## Possible Improvements
+
+* Add input validation
+* Allow editing task titles
+* Add task priorities or due dates
+* Add confirmation before deleting tasks
+* Add search or filter options
+* Improve task status display (done / pending instead of true / false)
+
+---
+This project is meant for learning and practice. It demonstrates basic Python concepts like file handling, JSON usage, and building a CLI application. Feel free to fork it and improve it.
