@@ -145,4 +145,3 @@ The program is divided into small, readable functions:
 * Improve task status display (done / pending instead of true / false)
 
 ---
-This project is meant for learning and practice. It demonstrates basic Python concepts like file handling, JSON usage, and building a CLI application. Feel free to fork it and improve it.
