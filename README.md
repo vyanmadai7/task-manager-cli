@@ -4,9 +4,9 @@ A very simple command-line task manager written in Python. It lets you add, view
 
 ---
 
-## Overview
+Overview
 
-This project is a basic terminal-based task manager. It uses a single JSON file (`tasks.json`) to store tasks. The focus of this project is simplicity and clarity, using only Python’s built-in libraries.
+This is a simple terminal-based task manager. It stores all tasks in a single JSON file (tasks.json). The main goal of this project is to keep the code clean, easy to understand, and built only with Python’s standard library.
 
 ---
 
